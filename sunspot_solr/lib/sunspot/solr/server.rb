@@ -99,11 +99,18 @@ module Sunspot
         command << "-Dsolr.data.dir=#{solr_data_dir}" if solr_data_dir
         command << "-Dsolr.solr.home=#{solr_home}" if solr_home
         command << "-Djava.util.logging.config.file=#{logging_config_path}" if logging_config_path
+        command << "-javaagent:#{newrelic_dir}/newrelic.jar" if newrelic_dir              
         command << '-jar' << File.basename(solr_jar)
         FileUtils.cd(File.dirname(solr_jar)) do
           exec(Shellwords.shelljoin(command))
         end
       end
+      
+      def newrelic_dir
+        path = File.expand_path(File.join(solr_home, 'newrelic'))
+        path if File.exists?(path)
+      end
+      
 
       #
       # Stop the sunspot-solr server.
