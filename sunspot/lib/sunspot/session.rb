@@ -91,6 +91,11 @@ module Sunspot
       indexer.add(objects)
     end
 
+    def index_within(time, *objects)
+      objects.flatten!
+      indexer.add_within(time, objects)
+    end
+
     # 
     # See Sunspot.index!
     #

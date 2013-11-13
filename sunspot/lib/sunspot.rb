@@ -184,6 +184,10 @@ module Sunspot
       session.index(*objects)
     end
 
+    def index_within(time, *objects)
+      session.index_within(time, *objects) 
+    end
+
     # Indexes objects on the singleton session and commits immediately.
     #
     # See: Sunspot.index and Sunspot.commit

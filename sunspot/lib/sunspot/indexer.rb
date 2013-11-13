@@ -31,6 +31,11 @@ module Sunspot
       end
     end
 
+    def add_within(time, model)
+      documents = Util.Array(model).map { |m| prepare(m) }
+      add_documents_within(time, documents) 
+    end
+
     # 
     # Remove the given model from the Solr index
     #
@@ -104,6 +109,10 @@ module Sunspot
 
     def add_documents(documents)
       @connection.add(documents)
+    end
+
+    def add_documents_within(time, documents)
+      @connection.add(documents, :add_attributes => {:commitWithin => time})
     end
 
     # 
