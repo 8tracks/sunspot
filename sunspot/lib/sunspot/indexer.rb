@@ -33,7 +33,7 @@ module Sunspot
 
     def add_within(time, model)
       documents = Util.Array(model).map { |m| prepare(m) }
-      add_documents_within(time, documents) 
+      add_documents_within(time, documents)
     end
 
     # 
